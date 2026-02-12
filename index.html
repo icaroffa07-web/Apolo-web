@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apolo</title>
+</head>
+<body style="background:black;color:white;text-align:center">
+
+<h1>🤖 APOLO</h1>
+
+<input id="msg" placeholder="Fale com Apolo">
+<button onclick="enviar()">Enviar</button>
+
+<p id="resposta"></p>
+
+<script>
+async function enviar(){
+  let msg = document.getElementById("msg").value;
+
+  let response = await fetch("/chat", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({mensagem: msg})
+  });
+
+  let data = await response.json();
+  document.getElementById("resposta").innerText = data.resposta;
+}
+</script>
+
+</body>
+</html>
